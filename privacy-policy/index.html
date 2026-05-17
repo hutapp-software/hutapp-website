@@ -5,154 +5,453 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy – HutApp LLC</title>
     <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg:          #080c18;
+            --accent:      #4f8ef7;
+            --accent2:     #a855f7;
+            --text:        #e2e8f0;
+            --muted:       #94a3b8;
+            --card-bg:     rgba(255,255,255,0.04);
+            --card-border: rgba(255,255,255,0.08);
+        }
+
+        html { scroll-behavior: smooth; }
+
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
         }
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-        }
-        nav {
-            background-color: #444;
-            color: #fff;
-            padding: 10px;
-            text-align: center;
-        }
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            margin: 0 10px;
-        }
-        nav a:hover {
-            text-decoration: underline;
-        }
-        section {
-            max-width: 800px;
-            margin: 30px auto 80px;
-            padding: 20px 30px;
-            background-color: #fff;
-            border-radius: 6px;
-        }
-        section h1 {
-            margin-top: 0;
-        }
-        section h2 {
-            margin-top: 28px;
-        }
-        section ul {
-            padding-left: 20px;
-        }
-        footer {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 10px;
+
+        #rain {
             position: fixed;
-            bottom: 0;
-            width: 100%;
+            inset: 0;
+            z-index: 0;
+            opacity: 0.18;
+            pointer-events: none;
         }
+
+        nav, main, footer { position: relative; z-index: 1; }
+
+        /* ── Nav ── */
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 60px;
+            background: rgba(8,12,24,0.85);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--card-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text);
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .logo-icon {
+            width: 34px; height: 34px;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 900; font-size: 1rem; color: #fff;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--card-border);
+            padding: 9px 22px;
+            border-radius: 24px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .btn-outline:hover {
+            border-color: var(--accent);
+            background: rgba(79,142,247,0.08);
+        }
+
+        /* ── Content ── */
+        .content {
+            max-width: 820px;
+            margin: 60px auto 100px;
+            padding: 0 24px;
+        }
+
+        .page-label {
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .content h1 {
+            font-size: 2.4rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #fff 40%, var(--accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .effective-date {
+            color: var(--muted);
+            font-size: 0.85rem;
+            margin-bottom: 48px;
+        }
+
+        .policy-section {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 28px 32px;
+            margin-bottom: 16px;
+            transition: border-color 0.3s;
+        }
+        .policy-section:hover { border-color: rgba(79,142,247,0.25); }
+
+        .policy-section h2 {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            color: var(--accent);
+            margin-bottom: 14px;
+        }
+
+        .policy-section h3 {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text);
+            margin: 16px 0 8px;
+        }
+
+        .policy-section p {
+            color: var(--muted);
+            font-size: 0.92rem;
+            line-height: 1.75;
+            margin-bottom: 10px;
+        }
+        .policy-section p:last-child { margin-bottom: 0; }
+
+        .policy-section ul {
+            padding-left: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 10px;
+        }
+        .policy-section ul:last-child { margin-bottom: 0; }
+
+        .policy-section li {
+            color: var(--muted);
+            font-size: 0.92rem;
+            line-height: 1.75;
+        }
+
+        .policy-section a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        .policy-section a:hover { text-decoration: underline; }
+
+        strong { color: var(--text); }
+
+        /* ── Footer ── */
+        footer {
+            border-top: 1px solid var(--card-border);
+            padding: 22px 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: var(--muted);
+            font-size: 0.82rem;
+            position: relative; z-index: 1;
+        }
+        footer a { color: var(--muted); text-decoration: none; }
+        footer a:hover { color: var(--text); }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>HutApp LLC</h1>
-</header>
+<canvas id="rain"></canvas>
 
 <nav>
-    <a href="../index.html">Home</a>
+    <a href="../index.html" class="logo">
+        <div class="logo-icon">H</div>
+        HutApp
+    </a>
+    <a href="../index.html" class="btn-outline">← Home</a>
 </nav>
 
-<section>
-    <h1>Privacy Policy</h1>
-    <p>Applications provided by HutApp (HutApp LLC). This Privacy Policy explains how we collect, use, and protect information when you use the app. By using them, you agree to this Policy.</p>
+<main>
+    <div class="content">
+        <div class="page-label">Legal</div>
+        <h1>Privacy Policy</h1>
+        <p class="effective-date">Effective date: May 17, 2026</p>
 
-    <h2>Information We Collect</h2>
-    <ul>
-        <li>Device information (model, OS version, language, country).</li>
-        <li>Usage analytics (events, screens, interactions).</li>
-        <li>Crash and performance data.</li>
-        <li>Account information you provide (e.g., email).</li>
-        <li>Purchase and subscription status (no full payment details stored).</li>
-        <li>Push notification tokens to deliver messages.</li>
-    </ul>
+        <div class="policy-section">
+            <p>HutApp LLC ("we", "our", or "us") operates mobile applications and related services (the "App"). This Privacy Policy explains how we collect, use, disclose, and protect information when you use our App.</p>
+            <p>By using the App, you agree to the collection and use of information in accordance with this Privacy Policy.</p>
+        </div>
 
-    <h2>Permissions and Purpose</h2>
-    <ul>
-        <li>Photos/Media to select or store images and other media.</li>
-        <li>Files/Storage to import, export, or cache content.</li>
-    </ul>
+        <div class="policy-section">
+            <h2>1. Information We Collect</h2>
+            <p>We may collect the following categories of information:</p>
 
-    <h2>How We Use Information</h2>
-    <ul>
-        <li>Provide and improve app functionality.</li>
-        <li>Personalize content and features.</li>
-        <li>Measure usage and better understand product performance.</li>
-        <li>Diagnose crashes and improve stability.</li>
-        <li>Send push notifications you opt into (you may disable in settings).</li>
-        <li>Validate purchases, manage subscriptions, and provide premium access.</li>
-        <li>Serve ads and measure their performance.</li>
-    </ul>
+            <h3>a) Device &amp; Technical Information</h3>
+            <ul>
+                <li>Device model and manufacturer</li>
+                <li>Operating system and version</li>
+                <li>Language settings</li>
+                <li>Country and region</li>
+                <li>IP address</li>
+                <li>Mobile network information</li>
+                <li>App version and identifiers</li>
+                <li>Advertising identifiers (such as Google Advertising ID)</li>
+            </ul>
 
-    <h2>Sharing of Information</h2>
-    <ul>
-        <li>Analytics providers (e.g., Google Analytics for Firebase).</li>
-        <li>Crash reporting providers (e.g., Firebase Crashlytics).</li>
-        <li>Advertising partners (e.g., Google AdMob).</li>
-        <li>Google Play Billing for purchases and subscriptions.</li>
-        <li>Push notifications provider (e.g., Firebase Cloud Messaging).</li>
-        <li>Authentication providers when you sign in (e.g., email, OAuth).</li>
-        <li>Service providers that help us operate the app (hosting, support) under confidentiality obligations.</li>
-        <li>Legal authorities if required by law, to protect rights, or investigate misuse.</li>
-    </ul>
+            <h3>b) Usage Information</h3>
+            <ul>
+                <li>Screens viewed</li>
+                <li>Features used</li>
+                <li>Buttons clicked</li>
+                <li>Session duration</li>
+                <li>Interactions within the App</li>
+                <li>Diagnostic and analytics events</li>
+            </ul>
 
-    <h2>Data Retention</h2>
-    <p>We keep personal data only as long as necessary for the purposes described in this Policy or as required by law. You may request deletion of your account or certain data by contacting us at <a href="mailto:support@hutapp.org">support@hutapp.org</a>.</p>
+            <h3>c) Crash &amp; Performance Data</h3>
+            <p>We may collect crash logs, error reports, and performance diagnostics to improve stability and functionality.</p>
 
-    <h2>Security</h2>
-    <p>We implement reasonable technical and organizational measures to protect information. However, no method of transmission or storage is 100% secure.</p>
+            <h3>d) Account Information</h3>
+            <p>If you create an account or contact us, we may collect:</p>
+            <ul>
+                <li>Email address</li>
+                <li>Username or profile information</li>
+                <li>Authentication information</li>
+            </ul>
 
-    <h2>Children's Privacy</h2>
-    <p>The app is not directed to children under 13 (or the minimum age in your jurisdiction). If you believe a child provided personal information, contact us to delete it.</p>
+            <h3>e) Purchase &amp; Subscription Information</h3>
+            <p>When you make purchases or subscribe through Google Play Billing:</p>
+            <ul>
+                <li>Purchase status</li>
+                <li>Subscription status</li>
+                <li>Transaction identifiers</li>
+            </ul>
+            <p>We do <strong>not</strong> collect or store full payment card details.</p>
 
-    <h2>Your Rights &amp; Choices</h2>
-    <p>Depending on your location (e.g., EU/EEA, UK, California), you may have rights to access, correct, delete, or port your data, and object to certain processing. To exercise rights, contact us at <a href="mailto:support@hutapp.org">support@hutapp.org</a>.</p>
+            <h3>f) Push Notification Data</h3>
+            <p>We may collect push notification tokens to deliver notifications and messages.</p>
+        </div>
 
-    <h2>International Transfers</h2>
-    <p>Your information may be processed and stored in countries other than your own. Where required, we rely on appropriate safeguards for international transfers.</p>
+        <div class="policy-section">
+            <h2>2. Permissions We May Request</h2>
+            <p>Depending on App functionality, we may request:</p>
 
-    <h2>Third-Party Services &amp; SDKs</h2>
-    <p>The app may integrate the following services:</p>
-    <ul>
-        <li><strong>Analytics</strong>: Google Analytics for Firebase (Google LLC).</li>
-        <li><strong>Crash reporting</strong>: Firebase Crashlytics (Google LLC).</li>
-        <li><strong>Ads</strong>: Google AdMob (Google LLC).</li>
-        <li><strong>Push</strong>: Firebase Cloud Messaging (Google LLC).</li>
-        <li><strong>Payments</strong>: Google Play Billing.</li>
-        <li><strong>Authentication</strong>: Firebase Authentication / OAuth providers.</li>
-    </ul>
+            <h3>Photos / Media / Storage</h3>
+            <p>To upload, save, export, or manage media and files.</p>
 
-    <h2>Changes to This Policy</h2>
-    <p>We may update this Policy to reflect changes to the app or applicable laws. We will post the updated Policy with a new "Effective date".</p>
+            <h3>Camera</h3>
+            <p>To capture photos, scan content, or enable camera-related features.</p>
 
-    <h2>Contact Us</h2>
-    <p>If you have questions about this Policy or privacy practices, contact us:</p>
-    <ul>
-        <li>Email: <a href="mailto:support@hutapp.org">support@hutapp.org</a></li>
-    </ul>
+            <h3>Notifications</h3>
+            <p>To send alerts, updates, reminders, or marketing notifications if enabled by the user.</p>
 
-    <h2>Effective Date</h2>
-    <p>2026 May 17</p>
-</section>
+            <p>You may disable permissions at any time through your device settings.</p>
+        </div>
+
+        <div class="policy-section">
+            <h2>3. How We Use Information</h2>
+            <ul>
+                <li>Provide and maintain App functionality</li>
+                <li>Improve user experience and App performance</li>
+                <li>Personalize content and features</li>
+                <li>Analyze usage trends and engagement</li>
+                <li>Diagnose technical issues and crashes</li>
+                <li>Send push notifications you opt into</li>
+                <li>Validate purchases and subscriptions</li>
+                <li>Prevent fraud, abuse, and unauthorized access</li>
+                <li>Serve advertisements and measure advertising effectiveness</li>
+                <li>Comply with legal obligations</li>
+            </ul>
+        </div>
+
+        <div class="policy-section">
+            <h2>4. Legal Basis for Processing (EEA/UK Users)</h2>
+            <p>Where required under applicable laws such as GDPR, we process personal data based on:</p>
+            <ul>
+                <li>User consent</li>
+                <li>Performance of a contract</li>
+                <li>Legitimate interests</li>
+                <li>Compliance with legal obligations</li>
+            </ul>
+        </div>
+
+        <div class="policy-section">
+            <h2>5. Sharing of Information</h2>
+            <p>We may share information with trusted third parties including:</p>
+
+            <h3>Analytics Providers</h3>
+            <p>Google Analytics for Firebase (Google LLC)</p>
+
+            <h3>Crash Reporting Services</h3>
+            <p>Firebase Crashlytics (Google LLC)</p>
+
+            <h3>Advertising Partners</h3>
+            <p>Google AdMob (Google LLC)</p>
+
+            <h3>Payment Processing</h3>
+            <p>Google Play Billing</p>
+
+            <h3>Push Notification Services</h3>
+            <p>Firebase Cloud Messaging (Google LLC)</p>
+
+            <h3>Authentication Providers</h3>
+            <p>Firebase Authentication and OAuth providers</p>
+
+            <h3>Infrastructure &amp; Hosting Providers</h3>
+            <p>Companies that help us operate, maintain, and support the App</p>
+
+            <h3>Legal Authorities</h3>
+            <p>When required by law or necessary to protect rights, safety, security, or investigate misuse</p>
+
+            <p>Third-party providers may process data according to their own privacy policies.</p>
+        </div>
+
+        <div class="policy-section">
+            <h2>6. Advertising</h2>
+            <p>The App may display third-party advertisements. Advertising partners may use advertising identifiers and similar technologies to provide personalized or non-personalized ads and measure ad performance.</p>
+            <p>Users in certain regions may be asked for consent where required by law.</p>
+        </div>
+
+        <div class="policy-section">
+            <h2>7. Data Retention</h2>
+            <p>We retain personal information only for as long as necessary for the purposes described in this Privacy Policy, unless a longer retention period is required by law.</p>
+            <p>You may request deletion of your account or personal data by contacting: <a href="mailto:support@hutapp.org">support@hutapp.org</a></p>
+        </div>
+
+        <div class="policy-section">
+            <h2>8. Data Security</h2>
+            <p>We implement reasonable technical, administrative, and organizational measures designed to protect information against unauthorized access, loss, misuse, or alteration.</p>
+            <p>However, no method of electronic transmission or storage is completely secure.</p>
+        </div>
+
+        <div class="policy-section">
+            <h2>9. Children's Privacy</h2>
+            <p>The App is not intended for children under 13 years old (or the minimum age required in your jurisdiction).</p>
+            <p>We do not knowingly collect personal information from children. If you believe a child has provided personal information, please contact us so we can remove the data.</p>
+        </div>
+
+        <div class="policy-section">
+            <h2>10. International Data Transfers</h2>
+            <p>Your information may be processed and stored in countries outside your country of residence, including the United States.</p>
+            <p>Where required by applicable law, we implement appropriate safeguards for international data transfers.</p>
+        </div>
+
+        <div class="policy-section">
+            <h2>11. Your Privacy Rights</h2>
+            <p>Depending on your jurisdiction, you may have rights to:</p>
+            <ul>
+                <li>Access personal data</li>
+                <li>Correct inaccurate data</li>
+                <li>Delete personal data</li>
+                <li>Restrict or object to processing</li>
+                <li>Withdraw consent</li>
+                <li>Request data portability</li>
+            </ul>
+            <p>To exercise your rights, contact: <a href="mailto:support@hutapp.org">support@hutapp.org</a></p>
+        </div>
+
+        <div class="policy-section">
+            <h2>12. Third-Party Services &amp; SDKs</h2>
+            <p>The App may use the following services and SDKs:</p>
+            <ul>
+                <li>Google Analytics for Firebase</li>
+                <li>Firebase Crashlytics</li>
+                <li>Firebase Cloud Messaging</li>
+                <li>Firebase Authentication</li>
+                <li>Google AdMob</li>
+                <li>Google Play Billing</li>
+            </ul>
+            <p>These services may collect information in accordance with their own privacy policies.</p>
+        </div>
+
+        <div class="policy-section">
+            <h2>13. Changes to This Privacy Policy</h2>
+            <p>We may update this Privacy Policy periodically to reflect changes in the App, legal requirements, or business practices.</p>
+            <p>Updated versions will be posted with a revised Effective Date.</p>
+        </div>
+
+        <div class="policy-section">
+            <h2>14. Contact Us</h2>
+            <p>If you have any questions about this Privacy Policy or privacy practices, contact us:</p>
+            <p>Email: <a href="mailto:support@hutapp.org">support@hutapp.org</a></p>
+            <p>Website: <a href="https://hutapp.org">hutapp.org</a></p>
+        </div>
+    </div>
+</main>
 
 <footer>
-    <p>&copy; 2024 HutApp LLC. All rights reserved.</p>
+    <span>&copy; 2026 HutApp LLC. All rights reserved.</span>
+    <a href="../index.html">Home</a>
 </footer>
+
+<script>
+    const canvas = document.getElementById('rain');
+    const ctx    = canvas.getContext('2d');
+    const CHARS  = '01{}[]<>|#$%@!?/\\~^&*=+-0123456789ABCDEF'.split('');
+    const SIZE   = 16;
+    let cols, drops;
+
+    function resize() {
+        canvas.width  = window.innerWidth;
+        canvas.height = window.innerHeight;
+        cols  = Math.floor(canvas.width / SIZE);
+        drops = Array.from({ length: cols }, () => Math.random() * -80);
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    function draw() {
+        ctx.fillStyle = 'rgba(8, 12, 24, 0.055)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.font = SIZE + 'px monospace';
+
+        for (let i = 0; i < cols; i++) {
+            const ch = CHARS[Math.random() * CHARS.length | 0];
+            const x  = i * SIZE;
+            const y  = drops[i] * SIZE;
+
+            ctx.fillStyle = `rgba(220, 180, 255, ${0.7 + Math.random() * 0.3})`;
+            ctx.fillText(ch, x, y);
+
+            ctx.fillStyle = 'rgba(79, 142, 247, 0.45)';
+            ctx.fillText(CHARS[Math.random() * CHARS.length | 0], x, y - SIZE);
+
+            if (y > canvas.height && Math.random() > 0.975) drops[i] = 0;
+            drops[i] += 0.45;
+        }
+    }
+
+    setInterval(draw, 40);
+</script>
 
 </body>
 </html>

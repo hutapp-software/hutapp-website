@@ -5,75 +5,479 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HutApp LLC</title>
     <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg:        #080c18;
+            --bg2:       #0d1224;
+            --accent:    #4f8ef7;
+            --accent2:   #a855f7;
+            --text:      #e2e8f0;
+            --muted:     #94a3b8;
+            --card-bg:   rgba(255,255,255,0.04);
+            --card-border: rgba(255,255,255,0.08);
+        }
+
+        html { scroll-behavior: smooth; }
+
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
         }
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-        }
-        nav {
-            background-color: #444;
-            color: #fff;
-            padding: 10px;
-            text-align: center;
-        }
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            margin: 0 10px;
-        }
-        nav a:hover {
-            text-decoration: underline;
-        }
-        section {
-            padding: 20px;
-            text-align: center;
-        }
-        footer {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 10px;
+
+        /* ── Digital rain canvas ── */
+        #rain {
             position: fixed;
-            bottom: 0;
-            width: 100%;
+            inset: 0;
+            z-index: 0;
+            opacity: 0.18;
+            pointer-events: none;
         }
+
+        /* ── Everything sits above canvas ── */
+        nav, main, footer { position: relative; z-index: 1; }
+
+        /* ── Nav ── */
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 60px;
+            background: rgba(8,12,24,0.85);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--card-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text);
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .logo-icon {
+            width: 34px; height: 34px;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 900; font-size: 1rem; color: #fff;
+        }
+
+        .nav-links {
+            display: flex; gap: 32px; list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--text); }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            color: #fff;
+            border: none;
+            padding: 9px 22px;
+            border-radius: 24px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: opacity 0.2s, transform 0.2s;
+            display: inline-block;
+        }
+        .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--card-border);
+            padding: 9px 22px;
+            border-radius: 24px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: border-color 0.2s, background 0.2s;
+            display: inline-block;
+        }
+        .btn-outline:hover {
+            border-color: var(--accent);
+            background: rgba(79,142,247,0.08);
+        }
+
+        /* ── Hero ── */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 100px 60px;
+            min-height: 88vh;
+            gap: 60px;
+        }
+
+        .hero-content { flex: 1; max-width: 560px; }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(79,142,247,0.12);
+            border: 1px solid rgba(79,142,247,0.3);
+            color: var(--accent);
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.07em;
+            text-transform: uppercase;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 {
+            font-size: 3.4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 18px;
+            background: linear-gradient(135deg, #fff 40%, var(--accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            color: var(--muted);
+            font-size: 1.05rem;
+            line-height: 1.75;
+            margin-bottom: 34px;
+        }
+
+        .hero-buttons { display: flex; gap: 14px; }
+
+        /* ── Floating phone ── */
+        .hero-visual {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(70px);
+            pointer-events: none;
+        }
+        .orb-blue  { width: 320px; height: 320px; background: rgba(79,142,247,0.18);  top: -60px;    right: -40px; }
+        .orb-purple{ width: 260px; height: 260px; background: rgba(168,85,247,0.18); bottom: -40px; left:  -20px; }
+
+        .phone {
+            width: 250px; height: 500px;
+            background: linear-gradient(160deg, #1a2035, #0d1224);
+            border-radius: 36px;
+            border: 1.5px solid rgba(255,255,255,0.1);
+            display: flex; flex-direction: column;
+            align-items: center;
+            padding: 18px;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.55), 0 0 60px rgba(79,142,247,0.12);
+            animation: float 4s ease-in-out infinite;
+            position: relative; z-index: 2;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50%       { transform: translateY(-14px); }
+        }
+
+        .phone-pill {
+            width: 70px; height: 5px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 3px;
+            margin-bottom: 18px;
+        }
+
+        .phone-screen {
+            width: 100%; flex: 1;
+            background: linear-gradient(160deg, rgba(79,142,247,0.12), rgba(168,85,247,0.12));
+            border-radius: 18px;
+            display: flex; flex-direction: column;
+            padding: 14px; gap: 9px;
+        }
+
+        .ps-card {
+            background: linear-gradient(135deg, rgba(79,142,247,0.22), rgba(168,85,247,0.22));
+            border-radius: 12px;
+            height: 80px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2rem;
+        }
+
+        .ps-row {
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            height: 38px;
+            display: flex; align-items: center;
+            padding: 0 10px; gap: 9px;
+        }
+
+        .ps-dot  { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+        .ps-line { flex: 1; height: 5px; background: rgba(255,255,255,0.1); border-radius: 3px; }
+
+        /* ── Shared section styles ── */
+        .section { padding: 80px 60px; }
+
+        .sec-label {
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .sec-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 44px;
+        }
+
+        .divider { height: 1px; background: var(--card-border); margin: 0 60px; }
+
+        /* ── Cards ── */
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 26px;
+            transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+            border-color: rgba(79,142,247,0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 14px 40px rgba(79,142,247,0.1);
+        }
+
+        .card-icon {
+            width: 46px; height: 46px;
+            background: linear-gradient(135deg, rgba(79,142,247,0.2), rgba(168,85,247,0.2));
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.3rem;
+            margin-bottom: 14px;
+        }
+
+        .card h3 {
+            font-size: 0.92rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 8px;
+        }
+
+        .card p { color: var(--muted); font-size: 0.88rem; line-height: 1.65; }
+
+        /* ── Contact cards ── */
+        .contact-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 26px;
+        }
+        .contact-card h3 {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--muted);
+            margin-bottom: 8px;
+        }
+        .contact-card a {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+        .contact-card a:hover { text-decoration: underline; }
+
+        /* ── Footer ── */
+        footer {
+            border-top: 1px solid var(--card-border);
+            padding: 22px 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: var(--muted);
+            font-size: 0.82rem;
+        }
+        footer a { color: var(--muted); text-decoration: none; }
+        footer a:hover { color: var(--text); }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>Welcome to HutApp</h1>
-</header>
+<canvas id="rain"></canvas>
 
 <nav>
-    <a href="#">Home</a>
-    <a href="#">About</a>
-    <a href="#">Support and contacts</a>
+    <a href="index.html" class="logo">
+        <div class="logo-icon">H</div>
+        HutApp
+    </a>
+    <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#apps">Apps</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="privacy-policy/index.html">Privacy Policy</a></li>
+    </ul>
+    <a href="mailto:support@hutapp.org" class="btn-primary">Get in Touch</a>
 </nav>
 
-<section>
-    <h2>About Us</h2>
-    <p>We're a small team focused on building mobile products.</p>
-    <p>This is a future place for our company's portfolio that we're currently building.</p>
-    <p>Look for further announcements.</p>
-</section>
+<main>
 
-<section>
-    <h2>Support and contacts</h2>
-    <p>You can reach us at <b>support@hutapp.org</b> for application support requests.</p>
-    <p>For other business matters please use <b>partnership@hutapp.org</b></p>
-</section>
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">Mobile-First Products</div>
+            <h1>Building Apps People Actually Use</h1>
+            <p>We're a small team focused on shipping fast, intuitive mobile products built to last.</p>
+            <div class="hero-buttons">
+                <a href="#apps" class="btn-primary">Our Apps</a>
+                <a href="#contact" class="btn-outline">Contact Us</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="orb orb-blue"></div>
+            <div class="orb orb-purple"></div>
+            <div class="phone">
+                <div class="phone-pill"></div>
+                <div class="phone-screen">
+                    <div class="ps-card">💰</div>
+                    <div class="ps-row"><div class="ps-dot"></div><div class="ps-line"></div></div>
+                    <div class="ps-row"><div class="ps-dot" style="background:#a855f7"></div><div class="ps-line"></div></div>
+                    <div class="ps-row"><div class="ps-dot" style="background:#22d3ee"></div><div class="ps-line"></div></div>
+                    <div class="ps-row"><div class="ps-dot"></div><div class="ps-line"></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- About -->
+    <section class="section" id="about">
+        <div class="sec-label">Who we are</div>
+        <div class="sec-title">About HutApp</div>
+        <div class="grid-3">
+            <div class="card">
+                <div class="card-icon">🚀</div>
+                <h3>Small &amp; Focused</h3>
+                <p>We move fast and ship quality products without the overhead of a large organization.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">📱</div>
+                <h3>Mobile First</h3>
+                <p>Everything we build starts on mobile, designed for real user habits and real constraints.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🔧</div>
+                <h3>Always Improving</h3>
+                <p>Our portfolio is growing. Look for further announcements as we release new products.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Apps -->
+    <section class="section" id="apps">
+        <div class="sec-label">Our Products</div>
+        <div class="sec-title">Apps</div>
+        <div class="grid-3">
+            <div class="card">
+                <div class="card-icon">💰</div>
+                <h3>FinHut</h3>
+                <p>A personal finance app for tracking expenses, managing budgets, and understanding your financial habits.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Contact -->
+    <section class="section" id="contact">
+        <div class="sec-label">Reach us</div>
+        <div class="sec-title">Contact</div>
+        <div class="grid-2">
+            <div class="contact-card">
+                <h3>App Support</h3>
+                <a href="mailto:support@hutapp.org">support@hutapp.org</a>
+            </div>
+            <div class="contact-card">
+                <h3>Business &amp; Partnerships</h3>
+                <a href="mailto:partnership@hutapp.org">partnership@hutapp.org</a>
+            </div>
+        </div>
+    </section>
+
+</main>
 
 <footer>
-    <p>&copy; 2024 HutApp LLC. All rights reserved. | <a href="privacy-policy/index.html" style="color:#fff;">Privacy Policy</a></p>
+    <span>&copy; 2024 HutApp LLC. All rights reserved.</span>
+    <a href="privacy-policy/index.html">Privacy Policy</a>
 </footer>
+
+<script>
+    // Digital rain — custom characters, no copyrighted assets
+    const canvas = document.getElementById('rain');
+    const ctx    = canvas.getContext('2d');
+    const CHARS  = '01{}[]<>|#$%@!?/\\~^&*=+-0123456789ABCDEF'.split('');
+    const SIZE   = 16;
+    let cols, drops;
+
+    function resize() {
+        canvas.width  = window.innerWidth;
+        canvas.height = window.innerHeight;
+        cols  = Math.floor(canvas.width / SIZE);
+        drops = Array.from({ length: cols }, () => Math.random() * -80);
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    function draw() {
+        ctx.fillStyle = 'rgba(8, 12, 24, 0.055)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.font = SIZE + 'px monospace';
+
+        for (let i = 0; i < cols; i++) {
+            const ch = CHARS[Math.random() * CHARS.length | 0];
+            const x  = i * SIZE;
+            const y  = drops[i] * SIZE;
+
+            // Head glyph: bright purple-white
+            ctx.fillStyle = `rgba(220, 180, 255, ${0.7 + Math.random() * 0.3})`;
+            ctx.fillText(ch, x, y);
+
+            // Trail glyph one step back: blue
+            ctx.fillStyle = 'rgba(79, 142, 247, 0.45)';
+            ctx.fillText(CHARS[Math.random() * CHARS.length | 0], x, y - SIZE);
+
+            if (y > canvas.height && Math.random() > 0.975) drops[i] = 0;
+            drops[i] += 0.45;
+        }
+    }
+
+    setInterval(draw, 40);
+</script>
 
 </body>
 </html>
