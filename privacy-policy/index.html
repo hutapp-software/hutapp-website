@@ -225,7 +225,7 @@
     <div class="content">
         <div class="page-label">Legal</div>
         <h1>Privacy Policy</h1>
-        <p class="effective-date">Effective date: May 17, 2026</p>
+        <p class="effective-date">Effective date: August 29, 2026</p>
 
         <div class="policy-section">
             <p>HutApp LLC ("we", "our", or "us") operates mobile applications and related services (the "App"). This Privacy Policy explains how we collect, use, disclose, and protect information when you use our App.</p>
@@ -233,8 +233,24 @@
         </div>
 
         <div class="policy-section">
+            <h2>Scope — Which Apps This Policy Covers</h2>
+            <p>This Privacy Policy covers all HutApp LLC applications. Our apps differ substantially in what they do, so the sections below describe the <strong>maximum</strong> set of information any HutApp app may process. A given app processes only what its own features require: where a section names a specific service, identifier, or permission, it applies only to the apps that actually use it.</p>
+            <p>Where this section and a general section below differ, <strong>this section governs</strong>.</p>
+
+            <h3>Book Hut (iOS, watchOS)</h3>
+            <p>Book Hut <strong>does not collect any data</strong>. It contains no analytics, crash-reporting, or advertising software, requests no advertising identifier, and has no user account, subscription, or in-app purchase. No information is transmitted to HutApp LLC by this app under any circumstance. Sections 1, 3, 5, 6, 10, and 12 below do not apply to Book Hut.</p>
+            <p>Book Hut connects only to services you choose:</p>
+            <ul>
+                <li><strong>Your own media server.</strong> If you add an Audiobookshelf or Jellyfin server, the app sends the username and password you enter to <strong>that server</strong> in order to obtain an access token. Your password is not stored. The token, your library details, and your listening position are kept on your device, and your listening position is sent back to your own server so that your progress follows you between devices. Jellyfin servers additionally receive a randomly generated installation identifier, which the Jellyfin protocol uses to tell devices apart; it is not derived from your hardware and is not shared with anyone else.</li>
+                <li><strong>LibriVox and the Internet Archive.</strong> If you browse the public-domain audiobook catalogue, your search terms and IP address reach <a href="https://librivox.org">librivox.org</a> and <a href="https://archive.org">archive.org</a>, which are operated independently of HutApp LLC and under their own privacy policies.</li>
+            </ul>
+            <p>Everything else — your books, bookmarks, listening history, and settings — stays on your device and in your device's own backup. To erase it, delete the app.</p>
+            <p>Book Hut requests one permission: <strong>local network access</strong>, so that it can reach a media server running on your own network. It requests no other permission.</p>
+        </div>
+
+        <div class="policy-section">
             <h2>1. Information We Collect</h2>
-            <p>We may collect the following categories of information:</p>
+            <p>Depending on which app you use and which of its features you use, we may collect the following categories of information. An app that does not provide a given feature does not collect the information associated with it — see <strong>Scope</strong> above.</p>
 
             <h3>a) Device &amp; Technical Information</h3>
             <ul>
@@ -295,7 +311,10 @@
             <h3>Notifications</h3>
             <p>To send alerts, updates, reminders, or marketing notifications if enabled by the user.</p>
 
-            <p>You may disable permissions at any time through your device settings.</p>
+            <h3>Local Network</h3>
+            <p>To find and connect to a server running on your own network. Requested by Book Hut, which uses it to reach your media server and requests no other permission.</p>
+
+            <p>Each app requests only the permissions its own features require, and an app that lacks a feature never asks for the permission behind it. You may disable permissions at any time through your device settings.</p>
         </div>
 
         <div class="policy-section">
@@ -327,7 +346,8 @@
 
         <div class="policy-section">
             <h2>5. Sharing of Information</h2>
-            <p>We may share information with trusted third parties including:</p>
+            <p>We may share information with trusted third parties including those listed below. Each is used only by apps that include the corresponding feature: an app with no analytics, advertising, accounts, or purchases shares information with none of them, and an app that collects nothing has nothing to share.</p>
+            <p><strong>We do not sell personal information.</strong></p>
 
             <h3>Analytics Providers</h3>
             <p>Google Analytics for Firebase (Google LLC)</p>
@@ -358,7 +378,8 @@
 
         <div class="policy-section">
             <h2>6. Advertising</h2>
-            <p>The App may display third-party advertisements. Advertising partners may use advertising identifiers and similar technologies to provide personalized or non-personalized ads and measure ad performance.</p>
+            <p>This section applies only to apps that display advertising. Book Hut contains no advertising and no advertising software.</p>
+            <p>Where an app does display advertising, it may show third-party advertisements. Advertising partners may use advertising identifiers and similar technologies to provide personalized or non-personalized ads and measure ad performance.</p>
             <p>Users in certain regions may be asked for consent where required by law.</p>
         </div>
 
@@ -366,12 +387,14 @@
             <h2>7. Data Retention</h2>
             <p>We retain personal information only for as long as necessary for the purposes described in this Privacy Policy, unless a longer retention period is required by law.</p>
             <p>You may request deletion of your account or personal data by contacting: <a href="mailto:support@hutapp.org">support@hutapp.org</a></p>
+            <p>Some of our apps keep information only on your device and transmit none of it to us — Book Hut is one. For those apps we hold nothing to delete, and deleting the app removes the data it stored.</p>
         </div>
 
         <div class="policy-section">
             <h2>8. Data Security</h2>
             <p>We implement reasonable technical, administrative, and organizational measures designed to protect information against unauthorized access, loss, misuse, or alteration.</p>
             <p>However, no method of electronic transmission or storage is completely secure.</p>
+            <p>Where an app connects to a server that you operate, the security of that connection also depends on how you have configured it. Book Hut uses an encrypted HTTPS connection wherever your server offers one, and remembers your server's certificate so that it can warn you if it changes. If you configure a server that uses an unencrypted <strong>http://</strong> address on your local network, information sent to it — including your sign-in details — travels unencrypted across that network.</p>
         </div>
 
         <div class="policy-section">
@@ -402,7 +425,7 @@
 
         <div class="policy-section">
             <h2>12. Third-Party Services &amp; SDKs</h2>
-            <p>The App may use the following services and SDKs:</p>
+            <p>Depending on the app, it may use the following services and SDKs:</p>
             <ul>
                 <li>Google Analytics for Firebase</li>
                 <li>Firebase Crashlytics</li>
@@ -412,6 +435,7 @@
                 <li>Google Play Billing</li>
             </ul>
             <p>These services may collect information in accordance with their own privacy policies.</p>
+            <p>An app that provides none of these features includes none of these SDKs. Book Hut includes none of them. Its only third-party component is the Readium toolkit, an open-source engine for reading EPUB files that runs entirely on your device and transmits nothing.</p>
         </div>
 
         <div class="policy-section">
